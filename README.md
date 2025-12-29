@@ -5,6 +5,9 @@
 
 ---
 
+# 插件仓库地址
+https://raw.githubusercontent.com/shaoqilan/jellyfin-plugin-xiaomusic/refs/heads/main/10.11/manifest.json
+
 ## ✨ 功能特性
 
 - 自动读取 Jellyfin 音乐库
