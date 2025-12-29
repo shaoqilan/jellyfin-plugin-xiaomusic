@@ -36,5 +36,5 @@ http://jellyfinserver:8096/XiaoMusic/GetMusicPlayList?UserName=&Ignore=xx|xx
 
 接口默认会返回一个名为 **“全部歌曲”** 的歌单。
 
-如果你希望忽略该歌单，请在 `Ignore` 参数中加入：
+如果你希望忽略该歌单，请在 `Ignore` 参数中加入：all
 
