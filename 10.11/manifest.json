@@ -6,13 +6,13 @@
     "description": "将库中音乐转成xiaomusic项目可用的歌单配置文件",
     "owner": "shaoqilan@live.com",
     "category": "General",
-    "imageUrl": "https://jellyfin-plugin.oss-cn-beijing.aliyuncs.com/XiaoMusic/cover.png",
+    "imageUrl": "",
     "versions": [
       {
         "version": "1.0.0.1",
         "changelog": "新增获取自定义歌单，可以忽略部分歌单。",
         "targetAbi": "10.11.5.0",
-        "sourceUrl": "https://jellyfin-plugin.oss-cn-beijing.aliyuncs.com/XiaoMusic/XiaoMusic_1.0.0.1.zip",
+        "sourceUrl": "https://github.com/shaoqilan/jellyfin-plugin-xiaomusic/releases/download/v1.0.0.1/XiaoMusic_1.0.0.1.zip",
         "checksum": "8A3456269E1B28702368853A43A7678A",
         "timestamp": "2025-12-29T17:42:49Z"
       }
