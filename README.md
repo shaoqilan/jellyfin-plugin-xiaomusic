@@ -1,0 +1,2 @@
+# jellyfin-plugin-xiaomusic
+将Jellyfin中的音乐和播放列表转成xiaomusic可用的网络歌单
