@@ -6,7 +6,7 @@
     "description": "将库中音乐转成xiaomusic项目可用的歌单配置文件",
     "owner": "shaoqilan@live.com",
     "category": "General",
-    "imageUrl": "",
+    "imageUrl": "https://raw.githubusercontent.com/shaoqilan/jellyfin-plugin-xiaomusic/main/images/cover.png",
     "versions": [
       {
         "version": "1.0.0.1",
