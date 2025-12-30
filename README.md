@@ -8,6 +8,15 @@
 # 插件仓库地址
 https://raw.githubusercontent.com/shaoqilan/jellyfin-plugin-xiaomusic/refs/heads/main/10.11/manifest.json
 
+安装插件
+添加插件存储库：
+
+国内加速：https://ghfast.top/https://raw.githubusercontent.com/shaoqilan/jellyfin-plugin-xiaomusic/refs/heads/main/10.11/manifest.json
+
+国外访问：https://raw.githubusercontent.com/shaoqilan/jellyfin-plugin-xiaomusic/refs/heads/main/10.11/manifest.json
+
+如果都无法访问，可以直接从 Release 页面下载，并解压到 jellyfin 插件目录中使用
+
 ## ✨ 功能特性
 
 - 自动读取 Jellyfin 音乐库
