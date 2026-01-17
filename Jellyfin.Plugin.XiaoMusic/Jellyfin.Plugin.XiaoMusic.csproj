@@ -1,21 +1,27 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <TargetFramework>net9.0</TargetFramework>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
-    <Version>1.0.0.1</Version>
-  </PropertyGroup>
+	<PropertyGroup>
+		<TargetFramework>net9.0</TargetFramework>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+		<Version>1.0.0.2</Version>
+	</PropertyGroup>
 
-  <ItemGroup>
-    <PackageReference Include="Jellyfin.Controller" Version="10.11.5" />
-    <PackageReference Include="Jellyfin.Model" Version="10.11.5" />
-  </ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="Jellyfin.Controller" Version="10.11.5" />
+		<PackageReference Include="Jellyfin.Model" Version="10.11.5" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <None Update="manifest.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-  </ItemGroup>
-
+	<ItemGroup>
+		<None Update="cover.png">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</None>
+		<None Update="manifest.json">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</None>
+	</ItemGroup>
+	<ItemGroup>
+		<None Remove="Configuration\configPage.html" />
+		<EmbeddedResource Include="Configuration\configPage.html" />
+	</ItemGroup>
 </Project>

@@ -1,0 +1,180 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>XiaoMusic</title>
+</head>
+<body>
+    <div id="XiaoMusicConfigPage" data-role="page" class="page type-interior pluginConfigurationPage" data-require="emby-input,emby-button,emby-select,emby-checkbox">
+        <div data-role="content">
+            <div class="content-primary">
+                <h1>XiaoMusic 插件配置</h1>
+                <form id="XiaoMusicConfigForm">
+                    <div class="inputContainer">
+                        <label class="inputLabel inputLabelUnfocused" for="DefaultPlayUrl">默认播放地址</label>
+                        <input id="DefaultPlayUrl" name="DefaultPlayUrl" type="text" is="emby-input" />
+                        <div class="fieldDescription">默认的播放地址,支持的占位符变量：Scheme，Host，PathBase，Path，UserId，Id以及url参数占位。</div>
+                    </div>
+                    <hr />
+                    <h2>自定义规则</h2>
+                    <div id="rulesContainer">
+
+                    </div>
+                    <div>
+                        <button onclick="addRule(this)" is="emby-button" type="button" class="raised button-submit block emby-button">
+                            <span>新增规则</span>
+                        </button>
+                    </div>
+                    <br />
+                    <hr />
+                    <br />
+                    <div>
+                        <button is="emby-button" type="submit" class="raised button-submit block emby-button">
+                            <span>保存</span>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <script type="text/javascript">
+            var XiaoMusicConfig = {
+                pluginUniqueId: 'ac2c8cbd-1097-4fc7-8052-db71eb7c9da5'
+            };
+            pageLoad();
+            function pageLoad() {
+                //注册事件
+                //页面显示事件
+                document.getElementById('XiaoMusicConfigPage').addEventListener('pageshow', pageShow);
+                //提交事件
+                document.getElementById('XiaoMusicConfigForm').addEventListener('submit', submitConfig);
+            }
+            //页面显示事件
+            function pageShow() {
+                Dashboard.showLoadingMsg();
+                ApiClient.getPluginConfiguration(XiaoMusicConfig.pluginUniqueId).then(function (config) {
+                    document.getElementById('DefaultPlayUrl').value = config.DefaultPlayUrl || "";
+                    document.getElementById("rulesContainer").innerHTML = "";
+                    var playUrlRule = config.PlayUrlRule || [];
+                    for (var i = 0; i < playUrlRule.length; i++) {
+                        var item = createRule(playUrlRule[i]);
+                        document.getElementById("rulesContainer").appendChild(item);
+                    }
+                    Dashboard.hideLoadingMsg();
+                });
+            }
+            //提交事件
+            function submitConfig(e) {
+                //规则的容器
+                const container = document.getElementById("rulesContainer");
+                //获取所有的规则
+                const fieldsets = container.querySelectorAll("fieldset");
+                const playUrlRule = [];
+                fieldsets.forEach(fs => {
+                    playUrlRule.push({
+                        Filter: fs.querySelector("input[data-type='filter']").value,
+                        PlayUrl: fs.querySelector("input[data-type='playurl']").value
+                    });
+                });
+                Dashboard.showLoadingMsg();
+                ApiClient.getPluginConfiguration(XiaoMusicConfig.pluginUniqueId).then(function (config) {
+                    config.DefaultPlayUrl = document.getElementById('DefaultPlayUrl').value;
+                    config.PlayUrlRule = playUrlRule;
+                    ApiClient.updatePluginConfiguration(XiaoMusicConfig.pluginUniqueId, config).then(function (result) {
+                        Dashboard.processPluginConfigurationUpdateResult(result);
+                    });
+                });
+                e.preventDefault();
+                return false;
+            }
+            function addRule(obj) {
+                //创建规则
+                var item = createRule({
+                    Filter: '',
+                    PlayUrl: ''
+                });
+                document.getElementById("rulesContainer").appendChild(item);
+            }
+            //创建规则容器
+            function createRule(rule) {
+                const fs = document.createElement("fieldset");
+                fs.className = "verticalSection verticalSection-extrabottompadding";
+
+                // legend
+                const legend = document.createElement("legend");
+                const h3 = document.createElement("h3");
+                h3.textContent = `规则`;
+                legend.appendChild(h3);
+                fs.appendChild(legend);
+
+                // ====== 文件过滤 ======
+                const filterContainer = document.createElement("div");
+                filterContainer.className = "inputContainer";
+
+                const filterLabel = document.createElement("label");
+                filterLabel.className = "inputLabel inputLabelUnfocused";
+                filterLabel.textContent = "文件过滤";
+
+                const filterInput = document.createElement("input");
+                filterInput.type = "text";
+                filterInput.value = rule.Filter;
+                filterInput.setAttribute("data-type", "filter");
+                filterInput.setAttribute("is", "emby-input");
+
+                const filterDesc = document.createElement("div");
+                filterDesc.className = "fieldDescription";
+                filterDesc.textContent = "用于筛选文件，支持通配符：“*”and“?”。多个条件使用“|”进行分割。";
+
+                filterContainer.appendChild(filterLabel);
+                filterContainer.appendChild(filterInput);
+                filterContainer.appendChild(filterDesc);
+
+                fs.appendChild(filterContainer);
+
+                // ====== 播放地址 ======
+                const urlContainer = document.createElement("div");
+                urlContainer.className = "inputContainer";
+
+                const urlLabel = document.createElement("label");
+                urlLabel.className = "inputLabel inputLabelUnfocused";
+                urlLabel.textContent = "播放地址";
+
+                const urlInput = document.createElement("input");
+                urlInput.type = "text";
+                urlInput.value = rule.PlayUrl;
+                urlInput.setAttribute("data-type", "playurl");
+                urlInput.setAttribute("is", "emby-input");
+
+                const urlDesc = document.createElement("div");
+                urlDesc.className = "fieldDescription";
+                urlDesc.textContent = "播放地址，支持的占位符变量：Scheme，Host，PathBase，Path，UserId，Id以及url参数占位。";
+
+                urlContainer.appendChild(urlLabel);
+                urlContainer.appendChild(urlInput);
+                urlContainer.appendChild(urlDesc);
+
+                fs.appendChild(urlContainer);
+
+                // ====== 删除按钮 ======
+                const btnContainer = document.createElement("div");
+
+                const delBtn = document.createElement("button");
+                delBtn.type = "button";
+                delBtn.className = "raised button-delete block emby-button";
+                delBtn.setAttribute("is", "emby-button");
+                delBtn.onclick = function () {
+                    delBtn.parentElement.parentElement.remove();
+                };
+
+                const span = document.createElement("span");
+                span.textContent = "删除规则";
+
+                delBtn.appendChild(span);
+                btnContainer.appendChild(delBtn);
+                fs.appendChild(btnContainer);
+
+                return fs;
+            }
+        </script>
+    </div>
+</body>
+</html>

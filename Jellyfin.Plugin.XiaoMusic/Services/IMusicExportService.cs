@@ -16,8 +16,7 @@ namespace Jellyfin.Plugin.XiaoMusic.Services
         /// 获取音乐播放列表
         /// </summary>
         /// <param name="query"></param>
-        /// <param name="baseUrl"></param>
         /// <returns></returns>
-        IEnumerable<MusicPlayList> GetMusicPlayList(QueryMusicPlayList query, string baseUrl);
+        IEnumerable<MusicPlayList> GetMusicPlayList(QueryMusicPlayList query);
     }
 }

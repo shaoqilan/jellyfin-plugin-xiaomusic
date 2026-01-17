@@ -18,11 +18,6 @@ namespace Jellyfin.Plugin.XiaoMusic.Models
         [JsonIgnore]
         public string Id { get; set; } = string.Empty;
         /// <summary>
-        /// 访问的基础地址
-        /// </summary>
-        [JsonIgnore]
-        public string BaseUrl { get; set; } = string.Empty;
-        /// <summary>
         /// 名称
         /// </summary>
         [JsonPropertyName("name")]
@@ -31,12 +26,6 @@ namespace Jellyfin.Plugin.XiaoMusic.Models
         /// 地址
         /// </summary>
         [JsonPropertyName("url")]
-        public string Url
-        {
-            get
-            {
-                return $"{BaseUrl}/Audio/{Id}/stream?static=true";
-            }
-        }
+        public string Url { get; set; } = string.Empty;
     }
 }

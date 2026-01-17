@@ -1,4 +1,5 @@
-﻿using MediaBrowser.Common.Configuration;
+﻿using Jellyfin.Plugin.XiaoMusic.Configuration;
+using MediaBrowser.Common.Configuration;
 using MediaBrowser.Common.Plugins;
 using MediaBrowser.Controller;
 using MediaBrowser.Model.Plugins;
@@ -15,7 +16,7 @@ namespace Jellyfin.Plugin.XiaoMusic
     /// <summary>
     /// 插件信息
     /// </summary>
-    public class Plugin : BasePlugin<BasePluginConfiguration>
+    public class Plugin : BasePlugin<PluginConfiguration>, IHasWebPages
     {
         /// <summary>
         /// 
@@ -25,7 +26,12 @@ namespace Jellyfin.Plugin.XiaoMusic
         /// <param name="xmlSerializer"></param>
         public Plugin(IApplicationPaths applicationPaths, IXmlSerializer xmlSerializer) : base(applicationPaths, xmlSerializer)
         {
+            Instance = this;
         }
+        /// <summary>
+        /// 插件的实例
+        /// </summary>
+        public static Plugin? Instance { get; private set; }
         /// <summary>
         /// 插件名称
         /// </summary>
@@ -38,5 +44,20 @@ namespace Jellyfin.Plugin.XiaoMusic
         /// 插件描述
         /// </summary>
         public override string Description => "将库中音乐转成xiaomusic项目可用的歌单配置文件";
+        /// <summary>
+        /// 插件的配置也买你
+        /// </summary>
+        /// <returns></returns>
+        public IEnumerable<PluginPageInfo> GetPages()
+        {
+            return
+            [
+                new PluginPageInfo
+                {
+                    Name = Name,
+                    EmbeddedResourcePath = string.Format(CultureInfo.InvariantCulture, "{0}.Configuration.configPage.html", GetType().Namespace)
+                }
+            ];
+        }
     }
 }

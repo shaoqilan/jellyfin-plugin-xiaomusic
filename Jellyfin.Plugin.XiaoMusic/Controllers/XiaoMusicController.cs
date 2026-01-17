@@ -37,8 +37,7 @@ namespace Jellyfin.Plugin.XiaoMusic.Controllers
         [HttpGet]
         public IActionResult GetMusicPlayList([FromQuery] QueryMusicPlayList query)
         {
-            var baseUrl = $"{Request.Scheme}://{Request.Host}";
-            var result = musicExportService.GetMusicPlayList(query, baseUrl);
+            var result = musicExportService.GetMusicPlayList(query);
             return Ok(result);
         }
     }

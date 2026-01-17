@@ -9,6 +9,14 @@
     "imageUrl": "https://raw.githubusercontent.com/shaoqilan/jellyfin-plugin-xiaomusic/main/images/cover.png",
     "versions": [
       {
+        "version": "1.0.0.2",
+        "changelog": "新增设置，允许自定义播放地址、允许过滤指定的文件使用指定的播放地址。",
+        "targetAbi": "10.11.5.0",
+        "sourceUrl": "https://jellyfin-plugin.oss-cn-beijing.aliyuncs.com/XiaoMusic/XiaoMusic_1.0.0.2.zip",
+        "checksum": "1CCF3681765F8C14FAF40BE09798F9D5",
+        "timestamp": "2026-01-17T13:47:49Z"
+      },
+      {
         "version": "1.0.0.1",
         "changelog": "新增获取自定义歌单，可以忽略部分歌单。",
         "targetAbi": "10.11.5.0",
