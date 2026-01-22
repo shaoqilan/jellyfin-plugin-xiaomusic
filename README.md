@@ -11,7 +11,7 @@ https://raw.githubusercontent.com/shaoqilan/jellyfin-plugin-xiaomusic/refs/heads
 安装插件
 添加插件存储库：
 
-国内加速：https://ghfast.top/https://raw.githubusercontent.com/shaoqilan/jellyfin-plugin-xiaomusic/refs/heads/main/10.11/manifest.json
+国内加速：https://ghfast.top/https://raw.githubusercontent.com/shaoqilan/jellyfin-plugin-xiaomusic/refs/heads/main/10.11/agency-manifest.json
 
 国外访问：https://raw.githubusercontent.com/shaoqilan/jellyfin-plugin-xiaomusic/refs/heads/main/10.11/manifest.json
 
